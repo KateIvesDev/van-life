@@ -1,0 +1,9 @@
+a {
+    text-decoration: none;
+}
+
+a.active-link {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #161616;
+}
