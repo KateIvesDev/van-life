@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 
 export default function HostVanDetail(){
 
@@ -14,24 +14,32 @@ export default function HostVanDetail(){
         .then(data => setCurrentVan(data.vans))
     }, [])
 
+    const activeStyles = {
+        fontWeight: 'bold',
+        textDecoration: 'underline',
+        color: '#161616',
+     }
     
 
     return(
         <section>
-            <Link to='/host/vans'>Back to all Views</Link>
+            <Link to='..'
+            relative='path'>Back to all Views</Link>
         
                {!currentVan ? <h1>Loading...</h1> :
                 <div key={currentVan.id} width={150} >
                     <img src={currentVan.imageUrl}></img>
                     <h2>{currentVan.name}</h2> 
                     <p>${currentVan.price}/day</p>
-                    <nav>Details Pricing Photos </nav>
-                        <div>
-                            <h3>Name: {currentVan.name}</h3>
-                            <h3>Category: {currentVan.type}</h3>
-                            <p>Description: {currentVan.description} </p>
-                            <h3>Visibility: Public</h3>
-                        </div>
+
+                    <div>
+                        <nav>
+                            <NavLink to='.' end style={({isActive}) => isActive ? activeStyles : null }>Details</NavLink>
+                            <NavLink to='pricing' style={({isActive}) => isActive ? activeStyles : null }>Pricing</NavLink>
+                            <NavLink to='photos' style={({isActive}) => isActive ? activeStyles : null }>Photos</NavLink>
+                        </nav>
+                        <Outlet context={ {currentVan} }/>
+                    </div>
                 </div>
                 }
         </section>
