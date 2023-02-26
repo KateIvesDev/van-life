@@ -7,3 +7,9 @@ a.active-link {
     text-decoration: underline;
     color: #161616;
 }
+button {
+    background-color: #E176;
+}
+.selected {
+    background-color: #E17654;
+}

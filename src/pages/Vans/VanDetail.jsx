@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 
 export default function VanDetail(){
 
     const params = useParams()
+    const location = useLocation()
     const [van, setVan] = useState(null)
+
 
     useEffect(() => {
         fetch(`/api/vans/${params.id}`)
@@ -12,9 +14,14 @@ export default function VanDetail(){
         .then(data => setVan(data.vans))
     },[params.id])
    
+    const search = location.state?.search || "";
+    const type = location.state?.type || 'all';
+
+  
     return(
         <section>
-         <Link to='/vans'>Back to all vans</Link>
+         <Link to={`..${search}`}
+          relative='path'>Back to {type} vans </Link>
         {van 
         ? (<div>
             <img src={van.imageUrl}/>
