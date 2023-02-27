@@ -1,8 +1,14 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 export default function Header(){
 
+    const navigate = useNavigate()
+
+    function fakeLogOut() {
+        localStorage.removeItem("loggedin")
+        navigate('/login')
+    }
 
     return(
         <header>
@@ -14,6 +20,12 @@ export default function Header(){
                     className={({isActive}) => isActive ? "active-link" : "" }>About</NavLink>
                 <NavLink to='/vans'
                     className={({isActive}) => isActive ? "active-link" : "" }>Vans</NavLink>
+
+                <NavLink to='/login'
+                className={({isActive}) => isActive ? "active-link" : "" }>Login</NavLink>
+
+                <button onClick={fakeLogOut}>X</button>
+                
             </nav>
 
         </header>
