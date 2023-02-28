@@ -1,5 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0 auto;
+    padding: 0;
+    background-color: #FFF7ED;
+    font-family: "Inter", sans-serif;
+    
+}
+
 a {
-    text-decoration: none;
+    text-decoration: unset;
+    color: unset;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 a.active-link {
@@ -8,8 +30,66 @@ a.active-link {
     color: #161616;
 }
 button {
+    border: none;
+    border-radius: 10px;
     background-color: #E176;
+    padding: .75rem 1.375rem;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
 }
+
 .selected {
     background-color: #E17654;
+}
+
+header {
+    display: flex;
+    flex: flex-row;
+    justify-content: space-between;
+    padding: 50px 0;
+}
+
+nav {
+    width: 50%;
+    display: flex;
+    flex: flex-row;
+    justify-content: space-evenly;
+    gap: 15px;
+}
+
+footer{
+    padding: 5%;
+    background-color: #252525;
+    color: #AAAAAA;
+    text-align: center;
+}
+
+.main-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+}
+
+.van-filter-button-wrapper{
+    display: flex;
+    flex: flex-row;
+    gap: 10px;
+    width: 50%;
+}
+.van-list-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+    gap: 35px;
+    margin: 10px 0;
+   
+}
+.van-list-item{
+    width: 100%;
+}
+
+.van-list-item img {
+    width: 100%;
 }

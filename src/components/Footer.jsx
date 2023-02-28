@@ -6,7 +6,7 @@ export default function Footer(){
     return (
 
         <footer>
-            <p>Copyright {currentYear} #VANLIFE</p>
+            <p>Ⓒ {currentYear} #VANLIFE</p>
         </footer>
     )
 }
