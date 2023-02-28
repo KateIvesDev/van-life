@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, Suspense } from 'react'
+import { Suspense } from 'react'
 import { Link, useSearchParams, useLoaderData, Await, defer } from 'react-router-dom'
 import { getVans } from '../../api'
 
@@ -10,7 +10,6 @@ export function loader(){
 export default function Vans(){
 
     const [ searchParams, setSearchParams ] = useSearchParams()
-    const [ error ] = useState(null)
     const dataPromise = useLoaderData()
 
     const typeFilter = searchParams.get('type')
@@ -26,9 +25,6 @@ export default function Vans(){
         })
     }
 
-    if (error){
-        return <h1>There was an error: {error.message}</h1>
-    }
 
     function renderVanElements(vans){
         const filteredVans = typeFilter ? vans.filter(van => van.type.toLowerCase() === typeFilter) : vans
@@ -77,7 +73,6 @@ export default function Vans(){
                 {renderVanElements}
                 </Await>
             </Suspense>
-            
         </section>
     )
 }
