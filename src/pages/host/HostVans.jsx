@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { Link, Await, defer, useLoaderData } from 'react-router-dom'
-import { getHostVans } from '../../api'
+//import { getHostVans } from '../../api'
 
 export function loader(){
     return defer( {vans: getHostVans()} )

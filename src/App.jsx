@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route} from 'react-router-dom'
 import Layout from './components/Layout'
 import HostLayout from './components/HostLayout'
@@ -18,12 +18,48 @@ import HostVanPricing from './pages/host/HostVanPricing'
 import NotFound from './pages/NotFound'
 import Error from './components/Error'
 import AuthRequired from './components/AuthRequired'
+//import  { data, db } from './api/firebase'
+//import { writeBatch, doc } from 'firebase/firestore'
+
 
 import './App.css'
 
-import './server'
+//import './server' //SINCE I WANT TO USE FIREBASE, I DONT WANT TO KEEP USING MIRAGE.JS SINCE IT WONT LET FIREBASE RUN
 
 function App() {
+
+{/* ONE TIME WRITE TO DATABASE WITH DUMMY DATA; DONT WANT TO KEEP COMMITING THE DATA TO THE DB
+  useEffect(() => {
+    async function writeDoc() {
+      const batch = writeBatch(db)
+
+      const van2Ref = doc(db, 'vans', '2')
+      batch.set(van2Ref, data[1])
+
+      const van3Ref = doc(db, 'vans', '3')
+      batch.set(van3Ref, data[2])
+
+      const van4Ref = doc(db, 'vans', '4')
+      batch.set(van4Ref, data[3])
+      
+      const van5Ref = doc(db, 'vans', '5')
+      batch.set(van5Ref, data[4])
+
+      const van6Ref = doc(db, 'vans', '6')
+      batch.set(van6Ref, data[5])
+
+      try {
+        await batch.commit()
+        console.log('batch commit')
+       }
+       catch(err){
+         console.log(err)  
+       }
+    } 
+    writeDoc() 
+  },[])
+ */} 
+
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
@@ -52,6 +88,7 @@ function App() {
   ))
 
   return (
+    
     <RouterProvider router={router}/>
   )
 }
