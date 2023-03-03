@@ -20,7 +20,7 @@ createServer({
     routes() {
         this.namespace = "api"
         this.logging = false
-
+        this.passthrough("https://firestore.googleapis.com/**")
         // eslint-disable-next-line no-unused-vars
         this.get("/vans", (schema, request, response) => {
             //return new Response(400, {}, {error: "Error fetching data"})

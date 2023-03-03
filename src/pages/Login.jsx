@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate, Form, useActionData, useNavigation } from 'react-router-dom'
-import { loginUser } from '../api'
+import { useLocation, useNavigate, useActionData, useNavigation, Form} from 'react-router-dom'
+import { auth, loginUser } from '../api/firebase'
+//import { useAuthState } from 'firebase/auth'
 
 export async function action( {request} ){
     const formData = await request.formData()
@@ -8,8 +9,7 @@ export async function action( {request} ){
     const password = formData.get('password')
     
     try {
-        const data = await loginUser( {email, password} )
-        localStorage.setItem('loggedin', true)
+        const data = await loginUser(email, password )
         return data
     } catch(err){
         return {
@@ -33,7 +33,6 @@ export default function Login(){
             navigate(from, { replace: true } )
         }
     }, [data, navigate])
-   
 
     return(
         <div>

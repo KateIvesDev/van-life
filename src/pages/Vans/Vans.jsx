@@ -1,10 +1,11 @@
 import React from 'react'
 import { Suspense } from 'react'
 import { Link, useSearchParams, useLoaderData, Await, defer } from 'react-router-dom'
-import { getVans } from '../../api'
+//import { getVans } from '../../api'
+import { getAllVans } from '../../api/firebase'
 
 export function loader(){
-    return defer( {vans: getVans()} )
+    return defer( {vans: getAllVans()} )
 }
 
 export default function Vans(){
