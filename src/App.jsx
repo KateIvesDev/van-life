@@ -6,6 +6,7 @@ import HostLayout from './components/HostLayout'
 import Home from './pages/Home'
 import About from './pages/About'
 import Login, { action as loginAction } from './pages/Login'
+import Register, { action as registerAction } from './pages/Register'
 import Vans, { loader as vansLoader } from './pages/vans/Vans'
 import VanDetail, {loader as vansDetailLoader} from './pages/vans/VanDetail'
 import Dashboard, {loader as hostVansLoader1} from './pages/host/Dashboard'
@@ -35,6 +36,7 @@ function App() {
           <Route index element={<Home/>}/>
           <Route path='about' element={<About/>}/>
           <Route path='login' element={<Login/>} action={loginAction}/>
+          <Route path='register' element={<Register/>} action={registerAction}/>
           <Route path='vans' element={<Vans/>} loader={vansLoader} errorElement={<Error/>}/>
           <Route path='vans/:id' element={<VanDetail/>} loader={vansDetailLoader} errorElement={<Error/>}/>
 

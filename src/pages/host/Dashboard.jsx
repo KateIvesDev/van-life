@@ -1,13 +1,22 @@
 import React, {Suspense} from 'react'
 import { Link, defer, useLoaderData, Await } from 'react-router-dom'
-import { getHostVans } from '../../api/firebase'
+import { getHostVans, getHost } from '../../api/firebase'
 
 export function loader(){
-    return defer( { vans:getHostVans()})
+    return defer( { vans:getHostVans(), user: getHost()} )
 }
+
 export default function Dashboard(){
 
     const loaderData = useLoaderData()
+
+   
+    function renderHost(user){
+    
+        return( 
+            <h2>Welcome {user.firstName}!</h2>
+        )
+    }
 
     function renderVanElements(vans){
         const hostVanEls = vans.map(van => (
@@ -30,11 +39,11 @@ export default function Dashboard(){
     }
     return(
         <section>
-            <h1>Host Dashboard</h1>  
-
-            <section>
-            <h2>Welcome!</h2>
-            </section>
+            <Suspense  fallback={<h2>Welcome! </h2>}>
+                <Await resolve={loaderData.user}>
+                    {renderHost}
+                </Await>
+            </Suspense>
 
             <section>
             <h2>Your Reviews</h2>
@@ -47,12 +56,7 @@ export default function Dashboard(){
                     </Await>
                 </Suspense>
             </section>
-
-         
-            
-
         </section>
         
     )
-
 }

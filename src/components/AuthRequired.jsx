@@ -5,7 +5,6 @@ import { Outlet, Navigate, useLocation } from 'react-router-dom'
 export default function AuthRequired(){
 
     const {user} = useContext(AuthContext)
-    console.log(user)
    
     const location = useLocation()
 

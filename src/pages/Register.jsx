@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react'
-import { Link, useLocation, useNavigate, useActionData, Form} from 'react-router-dom'
-import { loginUser } from '../api/firebase'
+import { useLocation, useNavigate, useActionData, useNavigation, Form} from 'react-router-dom'
+import { auth, registerUser } from '../api/firebase'
 
 
 export async function action( {request} ){
     const formData = await request.formData()
+    const firstName = formData.get('firstName')
+    const lastName = formData.get('lastName')
     const email = formData.get('email')
     const password = formData.get('password')
     
     try {
-        const data = await loginUser(email, password )
+        const data = await registerUser(firstName, lastName, email, password )
         return data
     } catch(err){
         return {
@@ -18,30 +20,37 @@ export async function action( {request} ){
     }
 }
 
-export default function Login(){
+export default function Register(){
 
-    const location = useLocation()
     const navigate = useNavigate()
-    //const navigation = useNavigation()
     const data = useActionData()
+
     useEffect(() => {
         if(data){
             navigate('/host')
         }
     }, [data])
 
-    
-   
     return(
         <div>
-            { location.state?.message &&
-                <p>{location.state.message}</p>
-            }
+          
             { data?.error && 
                 <p>{data.error}</p>
             }
-            <h1>Sign in to your account</h1>
-            <Form action='/login' method='post'>
+            <h1>Register for a Host account</h1>
+            <Form action='/register' method='post'>
+                <input
+                    name="firstName"
+                    type='firstName'
+                    placeholder='First name'
+                >
+                </input>
+                <input
+                name="lastName"
+                type='lastName'
+                placeholder='Last name'
+                >
+            </input>
                 <input
                     name="email"
                     type='email'
@@ -55,9 +64,9 @@ export default function Login(){
                 >
                 </input>
                 
-                <button>Login</button>
-                <p>Don&apos;t have an account? <Link to='/register'>Register as a Host today!</Link></p>
+                <button>Register as a Host</button>
             </Form>
         </div>
     )
+
 }

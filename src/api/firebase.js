@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, doc, getDoc, query, where} from "firebase/firestore"
+import { getFirestore, collection, setDoc, getDocs, doc, getDoc, query, where} from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
 
 const firebaseConfig = {
@@ -23,12 +23,13 @@ const db = getFirestore(app)
 const registerUser = async (firstName, lastName, email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth,email,password)
+   
     const user = userCredential.user
-    await addDoc(collection(db, 'users'), {
-      id: user.id,
+    await setDoc(doc(db, 'users', user.email), {
       email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName
+      firstName: firstName,
+      lastName: lastName,
+      hostId: user.uid
     })
     return true
  } catch(error){
@@ -42,7 +43,7 @@ const loginUser = async (email, password) => {
     // eslint-disable-next-line no-unused-vars
     const user = userCredential.user
     console.log('user is signed in')
-    return true
+    return user
   } catch(error){
       return {error: error.message}
   }
@@ -60,7 +61,6 @@ const logOutUser = () => {
   }
 }
 
-
 const vansRef = collection(db, "vans");
 
 export async function getAllVans(){
@@ -71,7 +71,6 @@ export async function getAllVans(){
   }))
   return dataArr
 }
-
 
 export async function getVan(id){
   const docRef = doc(db,'vans', id)
@@ -95,6 +94,22 @@ export async function getHostVans(){
   return dataArr
 }
 
+export async function getHost(){
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  const email = user.email;
+  console.log(email)
+  
+  const docRef = doc(db,'users', email)
+  const vanSnapshot = await getDoc(docRef)
+  return {
+    ...vanSnapshot.data(),
+    id: vanSnapshot.id
+  }
+  
+  
+}
 
 export {
   auth,
