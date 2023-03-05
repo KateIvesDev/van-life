@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
-import { useLocation, useNavigate, useActionData, useNavigation, Form} from 'react-router-dom'
-import { auth, registerUser } from '../api/firebase'
+import React, { useEffect, useContext } from 'react'
+import { useNavigate, useActionData, Form} from 'react-router-dom'
+import {  registerUser } from '../api/firebase'
+import AuthContext from '../components/AuthContext'
 
 
 export async function action( {request} ){
@@ -24,12 +25,13 @@ export default function Register(){
 
     const navigate = useNavigate()
     const data = useActionData()
+    const {user} = useContext(AuthContext)
 
     useEffect(() => {
-        if(data){
+        if(user){
             navigate('/host')
         }
-    }, [data])
+    }, [user])
 
     return(
         <div>
@@ -64,7 +66,7 @@ export default function Register(){
                 >
                 </input>
                 
-                <button>Register as a Host</button>
+                <button type='submit'>Register as a Host</button>
             </Form>
         </div>
     )

@@ -19,19 +19,24 @@ export default function Dashboard(){
     }
 
     function renderVanElements(vans){
-        const hostVanEls = vans.map(van => (
-            <Link to={van.id} key={van.id}>
-                <div key={van.id}>
+        const hostVanEls = vans.map(van => {
+            let url = '/host/vans/'+ van.id
+            return(
+            <Link to={url} key={van.id}>
+                <div key={van.id} className='van-list-item-wrapper'>
                     <img src={van.imageUrl} alt={van.name}/>
-                    <div>
+                    <div className='van-list-item-text'>
                         <h3>{van.name}</h3>
                         <p>${van.price}/day</p>
                     </div>
+                    <Link to={url}>Edit</Link>
                 </div>
             </Link>
-        ))
+            )
+            }
+        )
         return(
-            <section>
+            <section className='listed-van-wrapper'>
             <h2>Your listed vans</h2>
             {hostVanEls}
             </section>
@@ -39,7 +44,7 @@ export default function Dashboard(){
     }
     return(
         <section>
-            <Suspense  fallback={<h2>Welcome! </h2>}>
+            <Suspense fallback={<h2>Welcome!</h2>}>
                 <Await resolve={loaderData.user}>
                     {renderHost}
                 </Await>

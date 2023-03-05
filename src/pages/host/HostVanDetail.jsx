@@ -19,12 +19,19 @@ export default function HostVanDetail(){
          }
         
         return(
-                <div key={currentVan.id} width={150} >
-                    <img src={currentVan.imageUrl}></img>
-                    <h2>{currentVan.name}</h2> 
-                    <p>${currentVan.price}/day</p>
-
-                    <div>
+                <div key={currentVan.id} width={150} className='van-detail-wrapper'>
+                    
+                    <div className='van-detail-top'>
+                        <img src={currentVan.imageUrl}></img>
+                        <div>
+                            <p>{currentVan.type}</p>
+                            <h2>{currentVan.name}</h2> 
+                            <p>${currentVan.price}/day</p>
+                        </div>
+                    </div>
+                    
+                
+                    <div className='van-detail-bottom'>
                         <nav>
                             <NavLink to='.' end style={({isActive}) => isActive ? activeStyles : null }>Details</NavLink>
                             <NavLink to='pricing' style={({isActive}) => isActive ? activeStyles : null }>Pricing</NavLink>

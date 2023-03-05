@@ -1,7 +1,9 @@
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, setDoc, getDocs, doc, getDoc, query, where} from "firebase/firestore"
+import { getFirestore, collection, setDoc, addDoc, getDocs, doc, getDoc, query, where} from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import { getStorage } from "firebase/storage";
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
@@ -19,11 +21,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
 //Initialize Firestore
 const db = getFirestore(app)
+//Initialize Storage
+const storage = getStorage(app)
 
 const registerUser = async (firstName, lastName, email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth,email,password)
-   
     const user = userCredential.user
     await setDoc(doc(db, 'users', user.email), {
       email: user.email,
@@ -43,12 +46,11 @@ const loginUser = async (email, password) => {
     // eslint-disable-next-line no-unused-vars
     const user = userCredential.user
     console.log('user is signed in')
-    return user
+    return true
   } catch(error){
       return {error: error.message}
   }
 }
-
 
 const logOutUser = () => {
   try {
@@ -60,6 +62,7 @@ const logOutUser = () => {
     return false
   }
 }
+
 
 const vansRef = collection(db, "vans");
 
@@ -95,26 +98,42 @@ export async function getHostVans(){
 }
 
 export async function getHost(){
-  const auth = getAuth();
-  const user = auth.currentUser;
 
+  const user = auth.currentUser;
   const email = user.email;
-  console.log(email)
-  
+ 
   const docRef = doc(db,'users', email)
-  const vanSnapshot = await getDoc(docRef)
+  const hostSnapshot = await getDoc(docRef)
   return {
-    ...vanSnapshot.data(),
-    id: vanSnapshot.id
+    ...hostSnapshot.data(),
+    id: hostSnapshot.id
   }
-  
-  
 }
+
+const addVan = async (vanName, vanPrice, vanType, vanDescription, vanImg) => {
+  try {
+   const newDoc = await addDoc(collection(db, 'vans'), {
+      name: vanName,
+      price: vanPrice,
+      type: vanType,
+      description: vanDescription,
+      hostId: auth.currentUser.uid,
+      imageUrl: vanImg,
+    })
+    console.log(newDoc)
+    return true
+ } catch(error){
+    return {error: error.message}
+ }
+}
+
 
 export {
   auth,
   db,
+  storage,
   registerUser,
   loginUser,
-  logOutUser
+  logOutUser,
+  addVan,
 }

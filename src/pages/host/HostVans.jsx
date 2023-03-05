@@ -11,10 +11,12 @@ export default function HostVans(){
 
     const dataPromise = useLoaderData()
     function renderHostVanElements(vans){
+
         const hostVanEl = vans.map(van => {
+
             return(
                 <Link to={van.id} key={van.id}>
-                    <div key={van.id} className='host-van-list-wrapper'>
+                    <div key={van.id} className='van-list-item-wrapper'>
                         <img src={van.imageUrl}/>
                         <h2>{van.name}</h2>
                         <p>${van.price}/day</p>

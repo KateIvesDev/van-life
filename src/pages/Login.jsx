@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
-import { Link, useLocation, useNavigate, useActionData, Form} from 'react-router-dom'
+import React, { useEffect, useContext } from 'react'
+import AuthContext from '../components/AuthContext'
+import { Link, useLocation,  useNavigate, useActionData, Form } from 'react-router-dom'
 import { loginUser } from '../api/firebase'
 
 
@@ -11,11 +12,13 @@ export async function action( {request} ){
     try {
         const data = await loginUser(email, password )
         return data
+        
     } catch(err){
         return {
             error: err.message
         }
-    }
+    } 
+    
 }
 
 export default function Login(){
@@ -24,16 +27,18 @@ export default function Login(){
     const navigate = useNavigate()
     //const navigation = useNavigation()
     const data = useActionData()
+    
+    const {user} = useContext(AuthContext)
+   
     useEffect(() => {
-        if(data){
+        if(user){
             navigate('/host')
         }
-    }, [data])
-
+    }, [user])
     
-   
+  
     return(
-        <div>
+        <div >
             { location.state?.message &&
                 <p>{location.state.message}</p>
             }
@@ -41,7 +46,7 @@ export default function Login(){
                 <p>{data.error}</p>
             }
             <h1>Sign in to your account</h1>
-            <Form action='/login' method='post'>
+            <Form action='/login' method='post' className='form-layout'>
                 <input
                     name="email"
                     type='email'
@@ -55,7 +60,7 @@ export default function Login(){
                 >
                 </input>
                 
-                <button>Login</button>
+                <button type='submit'>Login</button>
                 <p>Don&apos;t have an account? <Link to='/register'>Register as a Host today!</Link></p>
             </Form>
         </div>

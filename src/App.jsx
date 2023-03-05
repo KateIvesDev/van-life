@@ -12,6 +12,7 @@ import VanDetail, {loader as vansDetailLoader} from './pages/vans/VanDetail'
 import Dashboard, {loader as hostVansLoader1} from './pages/host/Dashboard'
 import Income from './pages/host/Income'
 import Reviews from './pages/host/Reviews'
+import AddHostVan, { action as addVanAction } from './pages/host/AddHostVan'
 import HostVans, {loader as hostVansLoader} from './pages/host/HostVans'
 import HostVanDetail, {loader as hostDetailLoader} from './pages/host/HostVanDetail'
 import HostVanInfo from './pages/host/HostVanInfo'
@@ -51,6 +52,7 @@ function App() {
                   <Route path='photos' element={<HostVanPhotos/>}/>
                 </Route>
                 <Route path='reviews' element={<Reviews/>}/>
+                <Route path='addvan' element={<AddHostVan/>} errorElement={<Error/>} action={addVanAction}/>
               </Route>
           </Route>
           

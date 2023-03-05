@@ -9,6 +9,14 @@ html, body {
     font-family: "Inter", sans-serif;
     
 }
+label{
+    display: block;
+
+}
+input, select {
+    line-height: 1.5rem;
+    margin: 1rem 0;
+}
 
 a {
     text-decoration: unset;
@@ -17,6 +25,10 @@ a {
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+button {
+    margin: 1rem 0;
 }
 
 body {
@@ -50,11 +62,10 @@ header {
 }
 
 nav {
-    width: 50%;
     display: flex;
     flex: flex-row;
-    justify-content: space-evenly;
-    gap: 15px;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 footer{
@@ -98,4 +109,60 @@ footer{
 
 .van-list-item img {
     width: 100%;
+}
+
+.listed-vans-wrapper{
+    width: 100%;
+}
+
+.van-list-item-wrapper{
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.van-list-item-text{
+    width: 50%;
+}
+.van-list-item-wrapper img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.van-detail-wrapper {
+    background: white;
+    padding: 10px;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.van-detail-wrapper img{
+    width: 200px;
+    height: 200px;
+    margin: 10px 0;
+}
+
+.van-detail-top {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+}
+.van-detail-bottom {
+    margin: 20px 0;
+}
+
+.form-layout {
+    display: flex;
+    margin: 2rem 0;
+    flex-flow: column;
+    width: 50%;
 }
