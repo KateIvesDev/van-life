@@ -45,7 +45,7 @@ const loginUser = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth,email,password)
     // eslint-disable-next-line no-unused-vars
     const user = userCredential.user
-    console.log('user is signed in')
+    console.log('user is logged in')
     return true
   } catch(error){
       return {error: error.message}
@@ -112,7 +112,7 @@ export async function getHost(){
 
 const addVan = async (vanName, vanPrice, vanType, vanDescription, vanImg) => {
   try {
-   const newDoc = await addDoc(collection(db, 'vans'), {
+      await addDoc(collection(db, 'vans'), {
       name: vanName,
       price: vanPrice,
       type: vanType,
@@ -120,7 +120,6 @@ const addVan = async (vanName, vanPrice, vanType, vanDescription, vanImg) => {
       hostId: auth.currentUser.uid,
       imageUrl: vanImg,
     })
-    console.log(newDoc)
     return true
  } catch(error){
     return {error: error.message}

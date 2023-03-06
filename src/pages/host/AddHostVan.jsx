@@ -37,9 +37,10 @@ export default function AddHostVan(){
             uploadBytes(imageRef, imageUpload).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 setImageUrl(url)
+                alert('Upload successful. Click the Add Van button to finish adding your van.')
                 })
             })
-            console.log(imageUrl)
+       
         } catch(error) {
             return {error: error.message}
         }
