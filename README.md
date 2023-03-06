@@ -22,7 +22,7 @@ Demo: https://roaring-fox-5fe928.netlify.app/host
 
 ## What I Learned
 
-Before this project, I had basic experience using React Router with basic multipage websites. This project allowed me to gain more in-depth experience with some of the cool features of React Router 6 (defer, Suspense, Active Links, Nested Routes). I also skilled up on my experience using Firebase to implement authentication, as well as using it as a database and for data storage.
+Before this project, I had basic experience using React Router with multipage websites. This project allowed me to gain more in-depth experience with some of the cool features of React Router 6 (defer, Suspense, Active Links, Nested Routes). I also skilled up on my experience using Firebase to implement authentication, as well as using it as a database and for data storage.
 
 ## Bonus Features
 
