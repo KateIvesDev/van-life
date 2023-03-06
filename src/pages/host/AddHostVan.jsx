@@ -47,8 +47,7 @@ export default function AddHostVan(){
     } 
  
     const data = useActionData()
-    console.log(data)
-    console.log(imageUrl)
+
    
     return(
         <div>

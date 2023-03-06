@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { logOutUser } from '../api/firebase'
+import AuthContext from '../components/AuthContext'
 
 export default function Header(){
 
@@ -11,6 +12,7 @@ export default function Header(){
         navigate('/login')
         console.log ('logged out')
     }
+    const {user} = useContext(AuthContext)
 
     return(
         <header>
@@ -24,9 +26,14 @@ export default function Header(){
                     className={({isActive}) => isActive ? "active-link" : "" }>Vans</NavLink>
 
                 <NavLink to='/login'
-                className={({isActive}) => isActive ? "active-link" : "" }>Login</NavLink>
+                className={({isActive}) => isActive ? "active-link" : "" }><span className="material-symbols-outlined">
+                account_circle
+                </span></NavLink>
 
-                <button onClick={handleLogOut}>X</button>
+                {(user) &&
+                <span className="material-symbols-outlined logout-icon" onClick={handleLogOut}>logout
+                </span>
+                }
                 
             </nav>
 

@@ -34,13 +34,13 @@ export default function Register(){
     }, [user])
 
     return(
-        <div>
+        <section className='login-wrapper'>
           
             { data?.error && 
                 <p>{data.error}</p>
             }
             <h1>Register for a Host account</h1>
-            <Form action='/register' method='post'>
+            <Form action='/register' method='post' className='form-layout'>
                 <input
                     name="firstName"
                     type='firstName'
@@ -66,9 +66,9 @@ export default function Register(){
                 >
                 </input>
                 
-                <button type='submit'>Register as a Host</button>
+                <button className='main-btn' type='submit'>Register as a Host</button>
             </Form>
-        </div>
+        </section>
     )
 
 }

@@ -26,7 +26,7 @@ export default function Vans(){
         })
     }
 
-
+    
     function renderVanElements(vans){
         const filteredVans = typeFilter ? vans.filter(van => van.type.toLowerCase() === typeFilter) : vans
 
@@ -40,7 +40,7 @@ export default function Vans(){
                         <img src={van.imageUrl}/>
                         <h2>{van.name}</h2>
                         <p>${van.price}/day</p>
-                        <span>{van.type}</span>
+                        <span className={van.type}>{van.type}</span>
                     </Link>
                 </div>
             ))

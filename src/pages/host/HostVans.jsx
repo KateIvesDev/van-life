@@ -15,13 +15,15 @@ export default function HostVans(){
         const hostVanEl = vans.map(van => {
 
             return(
-                <Link to={van.id} key={van.id}>
-                    <div key={van.id} className='van-list-item-wrapper'>
-                        <img src={van.imageUrl}/>
+                <div key={van.id} className='van-list-row-wrapper'>
+                <Link to={van.id} key={van.id} className='van-list-item-wrapper'>
+                    <img src={van.imageUrl}/>
+                    <div className='van-list-item-text'>
                         <h2>{van.name}</h2>
                         <p>${van.price}/day</p>
-                    </div>
+                    </div>   
                 </Link>
+                </div>
             )
         })
 

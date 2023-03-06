@@ -38,7 +38,7 @@ export default function Login(){
     
   
     return(
-        <div >
+        <section className='login-wrapper'>
             { location.state?.message &&
                 <p>{location.state.message}</p>
             }
@@ -60,9 +60,9 @@ export default function Login(){
                 >
                 </input>
                 
-                <button type='submit'>Login</button>
+                <button type='submit' className='main-btn '>Login</button>
                 <p>Don&apos;t have an account? <Link to='/register'>Register as a Host today!</Link></p>
             </Form>
-        </div>
+        </section>
     )
 }

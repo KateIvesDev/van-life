@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, setDoc, addDoc, getDocs, doc, getDoc, query, where} from "firebase/firestore"
+import { getFirestore, collection, setDoc, deleteDoc, addDoc, getDocs, doc, getDoc, query, where} from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import { getStorage } from "firebase/storage";
 
@@ -127,6 +127,15 @@ const addVan = async (vanName, vanPrice, vanType, vanDescription, vanImg) => {
  }
 }
 
+const deleteVan = async (vanId) => {
+  try {
+    await deleteDoc(doc(db, "vans", vanId));
+  } catch(error){
+    return {error: error.message}
+  }
+  
+}
+
 
 export {
   auth,
@@ -136,4 +145,5 @@ export {
   loginUser,
   logOutUser,
   addVan,
+  deleteVan
 }

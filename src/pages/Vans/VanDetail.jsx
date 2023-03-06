@@ -21,13 +21,16 @@ export default function VanDetail(){
           <Suspense fallback={<h2>Loading...</h2>}>
             <Await resolve={dataPromise.van}>
               {(van) => (
-                  <div>
+                  <div className='van-detail-wrapper'>
                     <img src={van.imageUrl}/>
-                    <p>{van.type}</p>
-                    <h2>{van.name}</h2>
-                    <p>{van.description}</p>
-                    <p>${van.price}/day</p>
-                    <Link to=''>Rent this van</Link>
+                    <div>
+                      <span className={van.type}>{van.type}</span>
+                      <h2>{van.name}</h2>
+                      <p>${van.price}/day</p>
+                      <p>{van.description}</p>
+                    </div>
+                    
+                    <Link to='' className='main-btn'>Rent this van</Link>
                   </div>
               )}
             </Await>
