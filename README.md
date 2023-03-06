@@ -5,11 +5,17 @@
 ## Tech Stack
 
 -- JavaScript
--- React 
+
+-- React
+
 -- React Router
+
 -- Vite
+
 -- Firebase (Authentication, Database, File Storage)
+
 -- Vanilla CSS
+
 -- Netlify
 
 ## What I Learned
