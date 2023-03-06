@@ -2,6 +2,8 @@
 
 #VanLife app is a web application based on the React Router Scrimba course that will allow users to rent vans for roadtrips.
 
+Demo: https://roaring-fox-5fe928.netlify.app/host
+
 ## Tech Stack
 
 -- JavaScript
